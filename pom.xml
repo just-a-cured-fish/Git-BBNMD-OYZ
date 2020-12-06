@@ -12,6 +12,7 @@
         <module>bbnmd-userapi</module>
         <module>bbnmd-client-zuul</module>
         <module>bbnmd-web</module>
+        <module>bbnmd-topicapi</module>
     </modules>
     <name>mis-parent</name>
     <description>parent pom</description>

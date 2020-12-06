@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/bbnmd.iml" filepath="$PROJECT_DIR$/.idea/bbnmd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bbnmd-client-zuul/bbnmd-client-zuul.iml" filepath="$PROJECT_DIR$/bbnmd-client-zuul/bbnmd-client-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bbnmd-domain/bbnmd-domain.iml" filepath="$PROJECT_DIR$/bbnmd-domain/bbnmd-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bbnmd-topicapi/bbnmd-topicapi.iml" filepath="$PROJECT_DIR$/bbnmd-topicapi/bbnmd-topicapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bbnmd-userapi/bbnmd-userapi.iml" filepath="$PROJECT_DIR$/bbnmd-userapi/bbnmd-userapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bbnmd-web/bbnmd-web.iml" filepath="$PROJECT_DIR$/bbnmd-web/bbnmd-web.iml" />
+    </modules>
+  </component>
+</project>
