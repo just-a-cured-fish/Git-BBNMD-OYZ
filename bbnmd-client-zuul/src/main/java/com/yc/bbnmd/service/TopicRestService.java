@@ -2,8 +2,8 @@ package com.yc.bbnmd.service;
 
 import com.google.gson.Gson;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.yc.bbnmd.client.UserClient;
-import com.yc.bbnmd.entity.User;
+import com.yc.bbnmd.client.TopicClient;
+import com.yc.bbnmd.entity.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +12,14 @@ import java.util.Map;
 
 //Hystrix服务层:  调用 PiclibClient,实现断路器功能
 @Service
-public class UserRestService {
+public class TopicRestService {
     @Autowired(required = false)
-    private UserClient userClient;
+    private TopicClient topicClient;
 
 
     @HystrixCommand(fallbackMethod = "findByIdFallback")
     public String findById(Integer id) {
-        return userClient.findById(id);
+        return topicClient.findById(id);
     }
 
     private String findByIdFallback(Integer id) {
@@ -40,20 +40,20 @@ public class UserRestService {
     }
 
     @HystrixCommand(fallbackMethod = "createFallback")
-    public String create(User user) {
-        return userClient.create(user);
+    public String create(Topic topic) {
+        return topicClient.create(topic);
     }
 
-    private String createFallback(User user) {
+    private String createFallback(Topic topic) {
         Map map = new HashMap();
         map.put("code", "-1");
-        map.put("msg", "服务异常，无法添加用户" + user.getUname());
+        map.put("msg", "服务异常，无法添加帖子" + topic.getTid());
         return new Gson().toJson(map);
     }
 
     @HystrixCommand(fallbackMethod = "deleteFallback")
     public String delete(Integer id) {
-        return userClient.delete(id);
+        return topicClient.delete(id);
     }
 
     private String deleteFallback(Integer id) {

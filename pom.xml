@@ -13,6 +13,7 @@
         <module>bbnmd-client-zuul</module>
         <module>bbnmd-web</module>
         <module>bbnmd-topicapi</module>
+        <module>bbnmd-replayapi</module>
     </modules>
     <name>mis-parent</name>
     <description>parent pom</description>

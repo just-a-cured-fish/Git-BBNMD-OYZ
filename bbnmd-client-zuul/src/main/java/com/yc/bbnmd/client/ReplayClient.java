@@ -1,6 +1,7 @@
 package com.yc.bbnmd.client;
 
 import com.yc.bbnmd.config.FeignClientConfig;
+import com.yc.bbnmd.entity.Replay;
 import com.yc.bbnmd.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -13,19 +14,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "BASE-MICROSERVICE-ZUUL-GATEWAY",
         configuration = FeignClientConfig.class
 )  // 配置要按自定义的类FeignClientConfig
-public interface UserClient {
+public interface ReplayClient {
 
     //访问的路径value要修改成zuul指定的服务路由路径
-    @RequestMapping(method = RequestMethod.GET, value = "/yc-api/bbnmd-proxy/user/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/yc-api/bbnmd-proxy/replay/{id}")
     String findById(@RequestParam("id") Integer id);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/yc-api/bbnmd-proxy/user",
+    @RequestMapping(method = RequestMethod.POST, value = "/yc-api/bbnmd-proxy/replay",
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    String create(@RequestBody User user);
+    String create(@RequestBody Replay replay);
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/yc-api/bbnmd-proxy/user/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/yc-api/bbnmd-proxy/replay/{id}")
     String delete(@RequestParam("id") Integer id);
 
 }
