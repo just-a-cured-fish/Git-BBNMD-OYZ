@@ -17,15 +17,22 @@ public class User {
     private String uname;
     private String upwd;
     private String role;
-
+    private String head;
+    private String regtime;
+    private Integer gender;
     public User() {
     }
 
-    public User(Integer uid, String uname, String role) {
-        this.uid = uid;
-        this.uname = uname;
-        this.role = role;
+
+
+    public User(String uname,String upwd,String head,Integer gender){
+        this.uname=uname;
+        this.upwd=upwd;
+        this.head=head;
+        this.gender=gender;
+        this.role="普通用户";
     }
+
 
 
 }

@@ -6,6 +6,9 @@ spring:
   cloud:
     loadbalancer.retry.enabled: true
 
+  main:
+    allow-bean-definition-overriding: true
+
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver

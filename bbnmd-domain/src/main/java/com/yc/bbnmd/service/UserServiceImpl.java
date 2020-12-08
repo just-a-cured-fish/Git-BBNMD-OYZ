@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 
 @Service
 @Transactional
@@ -14,12 +16,11 @@ public class UserServiceImpl implements UserService {
 
     @Autowired(required = false)
     private UserMapper userMapper;
-
     @Override
     public void save(User user) {
-        User userBean = new User();
-        userBean.setUname(user.getUname());
-        userBean.setRole("普通用户");
+        //String uname,String head,Integer gender,String role
+        User userBean = new User(user.getUname(),user.getUpwd(),user.getHead(),user.getGender());
+        userBean.setRegtime(CommonUtils.formatDateTime(new Date()));
         try {
             userBean.setUpwd(CommonUtils.EncoderByMd5(user.getUpwd()));
         } catch (Exception e) {
@@ -31,7 +32,6 @@ public class UserServiceImpl implements UserService {
         //关键:
         user.setUid(userBean.getUid());
     }
-
     @Override
     public void delete(Integer id) {
         this.userMapper.deleteByPrimaryKey(id);
@@ -40,12 +40,8 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     @Override
     public User findOne(Integer id) {
-        User user = this.userMapper.selectByPrimaryKey(id);
-        System.out.println("User findOne");
-        System.out.println(user);
-        User userbean = new User(user.getUid(), user.getUname(),user.getRole());
-        return userbean;
-    }
+        return this.userMapper.selectByPrimaryKey(id);
 
+    }
 
 }

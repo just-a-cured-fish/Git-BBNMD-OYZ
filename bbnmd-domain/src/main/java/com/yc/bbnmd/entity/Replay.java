@@ -13,7 +13,22 @@ public class Replay {
     @Id  // JPA注解,指定此属性为表中的主键
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer rid;
+    private String title;
     private String content;
-    private String time;
+    private String publishtime;
+    private String modifytime;
     private Integer tid;
+    private Integer uid;
+
+    public Replay(){
+
+    }
+
+    public Replay(String title,String content,Integer tid,Integer uid){
+        this.title=title;
+        this.content=content;
+        this.tid=tid;
+        this.uid=uid;
+    }
+
 }

@@ -18,9 +18,9 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://admin:a@123.57.89.200:7301/eureka
+      defaultZone: http://admin:a@123.57.89.200:7001/eureka
   instance:
     preferIpAddress: true
-    instance-id: microservice-userprovider-bbnmd_1   #实例名
+    instance-id: microservice-userprovider-bbnmd_10  #实例名
     lease-expiration-duration-in-seconds: 90  #如果现在超过了5s的时间间隔( default: 90 s )
     lease-renewal-interval-in-seconds: 30   #设置心跳的时间间隔( default:30s )

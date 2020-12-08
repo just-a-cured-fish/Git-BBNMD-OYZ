@@ -43,7 +43,8 @@ public class TestReplayService {
         Replay replay = new Replay();
         replay.setContent("测试回复" + r.nextInt(9999));
         replay.setTid(2);
-        replay.setTime(CommonUtils.formatDateTime(new Date()));
+        replay.setPublishtime(CommonUtils.formatDateTime(new Date()));
+        replay.setModifytime(CommonUtils.formatDateTime(new Date()));
         replayService.save(replay);
         logger.info("新增的回复编号:" + replay.getRid());
         //断言.

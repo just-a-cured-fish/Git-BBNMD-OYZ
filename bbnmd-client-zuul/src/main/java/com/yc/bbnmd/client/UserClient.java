@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface UserClient {
 
     //访问的路径value要修改成zuul指定的服务路由路径
-    @RequestMapping(method = RequestMethod.GET, value = "/yc-api/bbnmd-proxy/user/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/yc-api/bbnmd-proxy/bbnmd/user/{id}")
     String findById(@RequestParam("id") Integer id);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/yc-api/bbnmd-proxy/user",
+    @RequestMapping(method = RequestMethod.POST, value = "/yc-api/bbnmd-proxy/bbnmd/user",
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     String create(@RequestBody User user);
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/yc-api/bbnmd-proxy/user/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/yc-api/bbnmd-proxy/bbnmd/user/{id}")
     String delete(@RequestParam("id") Integer id);
 
 }

@@ -14,6 +14,8 @@
         <module>bbnmd-web</module>
         <module>bbnmd-topicapi</module>
         <module>bbnmd-replayapi</module>
+        <module>bbnmd-user</module>
+        <module>bbnmd-boardapi</module>
     </modules>
     <name>mis-parent</name>
     <description>parent pom</description>

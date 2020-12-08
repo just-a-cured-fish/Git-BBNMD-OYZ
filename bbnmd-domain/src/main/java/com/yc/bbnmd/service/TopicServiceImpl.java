@@ -19,12 +19,11 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public void save(Topic topic) {
-        Topic topicBean = new Topic();
-        topicBean.setContent(topic.getContent());
-        topicBean.setUid(topic.getUid());
-        topicBean.setTime(CommonUtils.formatDateTime(new Date()));
+        //String title,String content, Integer uid, Integer bid
+        Topic topicBean = new Topic(topic.getTitle(),topic.getContent(),topic.getUid(),topic.getBid());
+        topicBean.setPublishtime(CommonUtils.formatDateTime(new Date()));
+        topicBean.setModifytime(CommonUtils.formatDateTime(new Date()));
         this.topicMapper.insert(topicBean);
-
         topic.setTid(topicBean.getTid());
     }
 
@@ -36,10 +35,8 @@ public class TopicServiceImpl implements TopicService {
     @Transactional(readOnly = true)
     @Override
     public Topic findOne(Integer id) {
-        Topic topic = this.topicMapper.selectByPrimaryKey(id);
-        System.out.println("\nTopic findOne:");
-        System.out.println(topic);
-        return topic;
+        return this.topicMapper.selectByPrimaryKey(id);
+
     }
 
 

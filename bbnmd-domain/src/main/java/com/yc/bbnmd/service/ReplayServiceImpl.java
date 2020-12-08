@@ -21,10 +21,10 @@ public class ReplayServiceImpl implements ReplayService {
 
     @Override
     public void save(Replay replay) {
-        Replay repalyBean = new Replay();
-        repalyBean.setContent(replay.getContent());
-        repalyBean.setTid(replay.getTid());
-        repalyBean.setTime(CommonUtils.formatDateTime(new Date()));
+        //String title,String content,Integer tid,Integer uid
+        Replay repalyBean = new Replay(replay.getTitle(),replay.getContent(),replay.getTid(),replay.getUid());
+        repalyBean.setPublishtime(CommonUtils.formatDateTime(new Date()));
+        repalyBean.setModifytime(CommonUtils.formatDateTime(new Date()));
         this.replayMapper.insert(repalyBean);
 
         replay.setRid(repalyBean.getRid());
@@ -38,10 +38,8 @@ public class ReplayServiceImpl implements ReplayService {
     @Transactional(readOnly = true)
     @Override
     public Replay findOne(Integer id) {
-        Replay replay = this.replayMapper.selectByPrimaryKey(id);
-        System.out.println("\nReplay findOne:");
-        System.out.println(replay);
-        return replay;
+
+        return this.replayMapper.selectByPrimaryKey(id);
     }
 
 

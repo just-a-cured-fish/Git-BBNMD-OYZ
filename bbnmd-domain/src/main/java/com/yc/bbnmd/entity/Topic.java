@@ -13,10 +13,13 @@ public class Topic {
     @Id  // JPA注解,指定此属性为表中的主键
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tid;   //注意: 对应的数据表中的字段名叫 book_id
+    private String title;
     private String content;
-    private String time;
+    private String publishtime;
+    private String modifytime;
     private Integer uid;
     private Integer hot;
+    private Integer bid;
 
     public Topic() {
         this.hot=0;
@@ -24,8 +27,17 @@ public class Topic {
 
     public Topic(String content, Integer uid, String time, Integer hot) {
         this.content = content;
-        this.time = time;
+        this.publishtime = time;
         this.uid = uid;
         this.hot = hot;
     }
+    public Topic(String title,String content, Integer uid, Integer bid) {
+        this.title = title;
+        this.content = content;
+        this.uid = uid;
+        this.bid = bid;
+        this.hot=0;
+    }
+
+
 }
