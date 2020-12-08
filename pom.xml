@@ -9,13 +9,15 @@
     <modules>
 
         <module>bbnmd-domain</module>
-        <module>bbnmd-userapi</module>
         <module>bbnmd-client-zuul</module>
         <module>bbnmd-web</module>
         <module>bbnmd-topicapi</module>
         <module>bbnmd-replayapi</module>
         <module>bbnmd-user</module>
         <module>bbnmd-boardapi</module>
+        <module>bbnmd-view</module>
+        <module>bbnmd-post</module>
+        <module>bbnmd-replay</module>
     </modules>
     <name>mis-parent</name>
     <description>parent pom</description>
