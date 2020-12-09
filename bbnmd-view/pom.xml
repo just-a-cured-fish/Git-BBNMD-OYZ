@@ -10,6 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>bbnmd-view</artifactId>
-
+    <packaging>pom</packaging>
+    <modules>
+        <module>view-domain</module>
+        <module>view-client</module>
+        <module>view-restapi</module>
+        <module>view-web</module>
+    </modules>
 
 </project>

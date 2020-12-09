@@ -11,6 +11,11 @@
 
     <artifactId>user-domain</artifactId>
     <dependencies>
+        <dependency>
+            <groupId>com.yc.bbnmd</groupId>
+            <artifactId>bbnmd-domain</artifactId>
+        </dependency>
+
         <!--单元测试  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
