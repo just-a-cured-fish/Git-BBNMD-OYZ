@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>com.yc.bbnmd</groupId>
-            <artifactId>user-client</artifactId>
+            <artifactId>view-client</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

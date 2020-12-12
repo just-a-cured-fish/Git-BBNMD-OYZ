@@ -5,11 +5,14 @@ import com.google.gson.Gson;
 
 import com.yc.bbnmd.entity.User;
 import com.yc.bbnmd.service.UserService;
+import com.yc.bbnmd.util.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -27,7 +30,7 @@ public class BbRestController {
 
         //非阻塞式异步编程方法。因为在web ui的微服务对rest api的调用中将使用这种高并发的编程方法，所以为了保证与调用端保持同步，这里也使用这种方法.
         return CompletableFuture.supplyAsync(() -> {
-            User user = userService.findOne(id);
+            User user = userService.findById(id);
             //协议
             Map<String, Object> map = new HashMap<>();
             map.put("code", 1);
@@ -37,6 +40,26 @@ public class BbRestController {
         });
 
     }
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public CompletableFuture<String> findOne(@RequestBody User userbean) {
+
+        //非阻塞式异步编程方法。因为在web ui的微服务对rest api的调用中将使用这种高并发的编程方法，所以为了保证与调用端保持同步，这里也使用这种方法.
+        return CompletableFuture.supplyAsync(() -> {
+
+
+
+            User user = userService.findOne(userbean);
+            //协议
+            Map<String, Object> map = new HashMap<>();
+            map.put("code", 1);
+            map.put("data", user);
+            System.out.println("map::::"+map);
+            return new Gson().toJson(map);
+        });
+
+    }
+
 
 
     @RequestMapping(method = RequestMethod.POST)

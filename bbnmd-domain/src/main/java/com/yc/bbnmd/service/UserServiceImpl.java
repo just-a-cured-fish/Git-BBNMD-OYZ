@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 
@@ -39,9 +41,16 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(readOnly = true)
     @Override
-    public User findOne(Integer id) {
+    public User findById(Integer id) {
         return this.userMapper.selectByPrimaryKey(id);
-
     }
+
+    @Override
+    public User findOne(User user) {
+        User userBean=user;
+        userBean.setUpwd(CommonUtils.EncoderByMd5(user.getUpwd()));
+        return this.userMapper.selectOne(user);
+    }
+
 
 }

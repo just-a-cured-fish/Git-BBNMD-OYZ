@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>论坛</title>
-<Link rel="stylesheet" type="text/css" href="style/style.css" />
+<Link rel="stylesheet" type="text/css" href="../static/style/style.css" />
 <style>
 ul,li{
 	list-style:none;
@@ -35,7 +35,7 @@ li:last-child{
 <body>
 <div id="yc_index">
 	<div>
-		<img src="image/logo.gif">
+		<img src="../static/image/logo.gif">
 	</div>
 	<!--      用户信息、登录、注册        -->
 	
@@ -58,7 +58,7 @@ li:last-child{
 			<p style="width:800px;height:20px;padding-left:20px;board:1px solid #F3F8EF;">{{p.boardname}}</p>
 			<ul v-for="c in child" v-if="c.parentid==p.boardid">
 				<li>
-					<img src="image/board.gif">
+					<img src="../static/image/board.gif">
 					<a :href="'list.html#'+c.boardid+'&'+c.boardname">{{c.boardname}}</a>
 				</li>
 				<li class="second">{{c.total}}</li>
@@ -70,9 +70,9 @@ li:last-child{
 <br/>
 <center class="gray">源辰信息</center>
 
-<script src="js/jquery-3.4.1.min.js"></script>
-<script src="js/axios.js"></script>
-<script src="js/vue.js"></script>
+<script src="../static/js/jquery-3.4.1.min.js"></script>
+<script src="../static/js/axios.js"></script>
+<script src="../static/js/vue.js"></script>
 <script>
 let vm=new Vue({
 	el:'#yc_index',

@@ -16,6 +16,7 @@
         <module>bbnmd-user</module>
         <module>bbnmd-boardapi</module>
         <module>bbnmd-view</module>
+        <module>bbnmb-base-microservice</module>
         <module>bbnmd-post</module>
         <module>bbnmd-replay</module>
     </modules>

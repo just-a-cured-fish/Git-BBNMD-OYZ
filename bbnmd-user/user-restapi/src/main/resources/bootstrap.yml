@@ -1,6 +1,6 @@
 spring:
   application:
-    name: user-provider-bbnmd   #应用服务名
+    name: microservice-provider-bbnmd   #应用服务名
   cloud:
     config:
       name: bbnmd-restapi-config      # 定义要读取的资源文件的名称即:    microservice-config-client.yml
@@ -18,7 +18,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://admin:a@123.57.89.200:7001/eureka
+      defaultZone: http://admin:a@eureka1:7001/eureka
   instance:
     preferIpAddress: true
     instance-id: userprovider-bbnmd_10  #实例名

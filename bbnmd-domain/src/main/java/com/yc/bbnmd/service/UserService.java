@@ -2,6 +2,8 @@ package com.yc.bbnmd.service;
 
 import com.yc.bbnmd.entity.User;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public interface UserService {
@@ -28,7 +30,14 @@ public interface UserService {
      * @param id
      * @return
      */
-    public User findOne(Integer id);
+    public User findById(Integer id);
+
+    /**
+     * 查找用户
+     * @param user
+     * @return
+     */
+    public User findOne(User user);
 
 
 }

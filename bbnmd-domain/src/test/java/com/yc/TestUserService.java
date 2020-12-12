@@ -4,6 +4,7 @@ package com.yc;
 import com.yc.bbnmd.service.UserService;
 import com.yc.bbnmd.entity.User;
 
+import com.yc.bbnmd.util.CommonUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,10 @@ public class TestUserService {
     @Test
     public void testFindOne() {
         User user = new User();
+        user.setUpwd(CommonUtils.EncoderByMd5("a"));
         user.setUid(1);
         logger.info("调用UserService.findOne");
-        User userbean = userService.findOne(user.getUid());
+        User userbean = userService.findOne(user);
         System.out.println(userbean);
     }
 

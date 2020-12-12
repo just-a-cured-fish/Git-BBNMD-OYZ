@@ -16,4 +16,11 @@ public interface PostService {
      */
     public void postReplay(Replay replay);
 
+    /**
+     * 更新回复
+     * @param replay
+     * @return
+     */
+    public int update(Replay replay);
+
 }
