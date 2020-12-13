@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>论坛--帖子列表</title>
+
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+
+<body>
+<div id="yc_list">
+<div>
+	<img src="image/logo.gif">
+</div>
+<!--      用户信息、登录、注册        -->
+
+	<div class="h" v-if="outlogin">
+		您尚未　<a href="login.html">登录</a>
+		&nbsp;| &nbsp; <a href="reg.html">注册</a> |
+	</div>
+	<div class="h" v-if="onlogin">
+		欢迎：{{uname}}
+	</div>
+
+
+<!--      主体        -->
+<div>
+<!--      导航        -->
+<br/>
+<div>
+	&gt;&gt;<b><a href="index.html">论坛首页</a></b>&gt;&gt;
+	<b><a href="list.html">{{boardname}}</a></b>
+</div>
+<br/>
+<!--      新帖        -->
+	<div>
+		<a :href="'post.html#add&'+boardid+'&'+boardname"><img src="../static/image/post.gif" name="td_post" border="0" id=td_post></a>
+	</div>
+<!--         翻 页         -->
+	<div>
+		<a href="javascript:void(0)" @click="findPre">上一页</a>|
+		<a href="javascript:void(0)" @click="findNext">下一页</a>
+	</div>
+
+	<div class="t">
+		<table cellSpacing="0" cellPadding="0" width="100%">		
+			<tr>
+				<TH class="h" style="WIDTH: 100%" colspan="4"><span>&nbsp;</span></TH>
+			</tr>
+<!--       表 头           -->
+			<tr class="tr2">
+				<td>&nbsp;</td>
+				<td style="WIDTH: 80%" align="center">文章</td>
+				<td style="WIDTH: 10%" align="center">作者</td>
+				<td style="WIDTH: 10%" align="center">回复</td>
+			</tr>
+<!--         主 题 列 表        -->
+			
+			<tr class="tr3" v-for="topic in topics">
+				<td><img src="../static/image/topic.gif" border=0></td>
+				<td style="FONT-SIZE: 15px">
+					<a :href="'detail.html#'+topic.topicid">{{topic.title}}</a>
+				</td>
+				<td align="center">{{topic.uname}}</td>
+				<td align="center">{{topic.total}}</td>
+			</tr>			
+		</table>
+	</div>
+<!--            翻 页          -->
+	<div>
+		<a href="javascript:void(0)" @click="findPre">上一页</a>|
+		<a href="javascript:void(0)" @click="findNext">下一页</a>
+	</div>
+</div>
+</div>
+<!--             声 明          -->
+<br/>
+<center class="gray">源辰信息</center>
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/axios.js"></script>
+<script src="js/qs.js"></script>
+<script>
+var hash=window.location.hash;
+hash=hash.replace('#','');
+hash=hash.split('&');
+
+if(hash.length!=2){
+	window.location.href='index.html';
+}
+var bdid=hash[0];
+var bdname=hash[1];
+var pageNum=1;
+var pageSize=2;
+var app=new Vue({
+	el:'#yc_list',
+	data:{
+		page:1,
+		rows:2,
+		boardname:'',
+		boardid:'',
+		topics:{},
+		maxPage:'',//总条数
+		uname:'匿名',
+		onlogin:false,
+		outlogin:true
+	},
+	methods:{
+		findPre:function(){
+			if(this.page<=1){
+				alert("已到首页");
+				return;
+			}
+			this.page=this.page-1;
+			axios.get("bbnmd/view/findPage",{params:{page:this.page,rows:this.rows,bid:this.boradid}}).then(result=>{
+				this.topics=result.data.topics;
+			});
+		},
+		findNext:function(){
+			if(this.page>=this.maxPage){
+				alert("已到最后一页");
+				return;
+			}
+			this.page=this.page+1;
+			axios.get("bbnmd/view/findPage",{params:{page:this.page,rows:this.rows,bid:this.boradid}}).then(result=>{
+				this.topics=result.data.topics;
+			});
+		}
+	},
+	mounted:function(){
+		axios.all([checkLogin(),findByPage()]).then(axios.spread((fn1,fn2)=>{
+			if(!fn1.data){//用户未登录
+				window.location.href='login.html';	
+			}else{
+				this.uname=fn1.data.uname;
+				this.outlogin=false;
+				this.onlogin=true;
+				this.topics=fn2.data.topics;
+				this.maxPage=fn2.data.maxPage;
+				this.boardname=bdname;
+				this.boardid=bdid;
+			}
+		}));
+	}
+});
+//检查登录
+function checkLogin(){
+	return axios.get("bbnmd/view/check");
+}
+//显示首页版权信息
+function findByPage(){
+	return axios.get("bbnmd/view/findPage?page="+pageNum+"&pageSize="+pageSize+"&bid="+bdid);
+}
+</script>
+</body>
+</HTML>

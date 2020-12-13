@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>论坛</title>
+<Link rel="stylesheet" type="text/css" href="style/style.css" />
+<style>
+ul,li{
+	list-style:none;
+}
+.yc_title,.yc_info{
+	width:100%;
+}
+.yc_title li{
+	color:blue;
+}
+li{float:left;}
+li:first-child{
+	width:60%;
+}
+.second{
+	width:8%;
+}
+li:last-child{
+	width:30%;
+}
+.yc_info li{
+	height:30px;
+	board:1px solid #F3F8EF;
+}
+</style>
+
+</head>
+
+<body>
+<div id="yc_index">
+	<div>
+		<img src="image/logo.gif">
+	</div>
+	<!--      用户信息、登录、注册        -->
+	
+	<div class="h" v-if="outlogin">
+		您尚未　<a href="login.html">登录</a>
+		&nbsp;| &nbsp; <a href="reg.html">注册</a> |
+	</div>
+	<div class="h" v-if="onlogin">
+		欢迎：{{uname}}
+	</div>
+	
+	<!--      主体        -->
+	<div class="t">
+		<ul class="yc_title">
+			<li>论坛</li>
+			<li class="second">主题</li>
+			<li>最后发表</li>
+		</ul>
+		<div style="width:100%;" class="yc_info" v-for="p in parentBoard">
+			<p style="width:800px;height:20px;padding-left:20px;board:1px solid #F3F8EF;">{{p.boardname}}</p>
+			<ul v-for="c in child" v-if="c.parentid==p.boardid">
+				<li>
+					<img src="../static/image/board.gif">
+					<a :href="'list.html#'+c.boardid+'&'+c.boardname">{{c.boardname}}</a>
+				</li>
+				<li class="second">{{c.total}}</li>
+				<li><a :href="'detail.html#'+c.topicid">{{c.title}}</a><br/>[{{c.uname}}] [{{c.recentmodifytime}}]</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<br/>
+<center class="gray">源辰信息</center>
+
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/axios.js"></script>
+<script src="js/vue.js"></script>
+<script>
+let vm=new Vue({
+	el:'#yc_index',
+	data:{
+		parentBoard:{},//顶级板块
+		child:{},//子版块
+		uname:'匿名',
+		onlogin:false,
+		outlogin:true
+		
+	},
+	methods:{
+		
+	},
+	mounted:function(){
+		//页面加载完成后
+		axios.all([checkLogin(),findIndex()]).then(axios.spread((fn1,fn2)=>{
+			if(!fn1.data){//用户未登录
+				window.location.href='login.html';
+			}else{
+				this.uname=fn1.data.uname;
+				this.outlogin=false;
+				this.onlogin=true;
+				this.parentBoard=fn2.data.parent;
+				this.child=fn2.data.child;
+				
+			}
+		}));
+	}
+});
+
+//检查用户是否登录
+function checkLogin(){
+	return axios.get("bbnmd/view/check");
+}
+
+//显示首页板块信息
+function findIndex(){
+	return axios.get("bbnmd/view");
+}
+
+</script>
+
+</body>
+</HTML>
