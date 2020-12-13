@@ -18,7 +18,7 @@
 
     <!-- mybatis及自己定义的类   -->
     <logger name="org.apache.ibatis" level="DEBUG"/>
-    <logger name="com.yc.bbnmd" level="DEBUG"/>
+    <logger name="com.yc.bbnmd1" level="DEBUG"/>
 
 
     <!-- 设置日志级别 -->

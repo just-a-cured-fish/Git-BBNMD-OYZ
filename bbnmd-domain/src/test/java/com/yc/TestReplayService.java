@@ -1,11 +1,9 @@
 package com.yc;
 
 
-import com.yc.bbnmd.entity.Replay;
-import com.yc.bbnmd.entity.User;
-import com.yc.bbnmd.service.ReplayService;
-import com.yc.bbnmd.service.UserService;
-import com.yc.bbnmd.util.CommonUtils;
+import com.yc.bbnmd1.entity.Replay;
+import com.yc.bbnmd1.service.ReplayService;
+import com.yc.bbnmd1.util.CommonUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
